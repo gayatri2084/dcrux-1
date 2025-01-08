@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import datetime
 
-# Store assessment data (in-memory for this example, use a database for production)
 assessment_data = []
 
 def calculate_risk_score(answers):
@@ -27,7 +26,7 @@ def recommend_interventions(risk_score):
 
 st.title("Student Wellbeing Risk Assessment")
 
-with st.expander("About this assessment"): # Added an expander for context
+with st.expander("About this assessment"): 
     st.write("""This is a simplified self-assessment tool designed to help you reflect on your wellbeing. 
              It is not a diagnostic tool and should not replace professional consultation. If you are 
              experiencing significant distress, please reach out to a counselor or mental health professional.""")
@@ -53,7 +52,7 @@ st.write(f"Recommendation: {recommendation}")
 if risk_score >= 6:
     st.warning("A notification would be sent to the counselor in a real application. This is a simulation.")
 
-    # Simulate data logging (replace with database interaction in production)
+   
     assessment_data.append({
         "timestamp": datetime.datetime.now(),
         "risk_score": risk_score,
@@ -62,16 +61,15 @@ if risk_score >= 6:
 
     st.write("Assessment data logged (simulation).")
 
-# Add a section to display past assessments (for the user)
 if assessment_data:
     st.subheader("Your Assessment History (Simulated)")
     df = pd.DataFrame(assessment_data)
-    df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S') # Format timestamp
+    df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
     st.dataframe(df)
 else:
     st.write("No assessment history yet.")
 
-# Add resources section
+
 st.subheader("Resources")
 st.write("Here are some resources that may be helpful:")
 st.markdown("* [Crisis Text Line](https://www.crisistextline.org/): Text HOME to 741741")
@@ -79,12 +77,11 @@ st.markdown("* [The National Suicide Prevention Lifeline](https://suicideprevent
 st.markdown("* [MentalHealth.gov](https://www.mentalhealth.gov/)")
 
 
-# Add a feedback section
 st.subheader("Feedback")
 feedback = st.text_area("Please provide any feedback on this tool:")
 if st.button("Submit Feedback"):
     if feedback:
         st.success("Thank you for your feedback!")
-        # In a real app, store this feedback
+    
     else:
         st.warning("Please enter some feedback.")
